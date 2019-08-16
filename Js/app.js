@@ -3,8 +3,8 @@ new Vue( {
     data: {
         keyword: '',
         isTrue: false,
-        movieList: [],
-        filterLlst: [],
+        movieList: '',
+        filterLlst: {},
         fullInfo: {
             "adult": false,
             "backdrop_path": "/1TFEtFxD1M9OvMGlGcSAR5Pg53I.jpg",
@@ -84,26 +84,34 @@ new Vue( {
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover"
         },
-        posterHead: 'https://image.tmdb.org/t/p/original',
+        imgHead: 'https://image.tmdb.org/t/p/original',
+        currentItem: 0
     },
     methods: {
-
-        /* getList() {
-            var url = 'https://api.themoviedb.org/3/search/movie?api_key={da4d11234eb9fbd69aa0dd7c6323eff9}&query=' + this.keyword;
-            fetch( url )
-                .then( Response => Response.json() )
-                .then( data => {
-                    this.movieList = data.results;
-                } )
-        }, */
-
         //? Select movie from searchlist by index.
         //? Clear input on selection
         getMovie( index ) {
             this.filterLlst = this.movieList[ index ];
             this.isTrue = false;
-            this.keyword = '';
-
+        },
+        nextItem() {
+            if ( event.keyCode == 38 && this.currentItem > 0 ) {
+                this.currentItem--
+                console.log( this.currentItem );
+            } else if ( event.keyCode == 40 && this.currentItem < this.movieList.length ) {
+                this.currentItem++;
+                console.log( this.currentItem );
+            }
+        },
+        movieEnter() {
+            if ( this.keyword != '' ) {
+                this.filterLlst = this.movieList[ this.currentItem ];
+                this.isTrue = false;
+            }
+        },
+        itemIndex( index ) {
+            this.currentItem = index;
+            console.log( index )
         }
     },
     watch: {
@@ -128,11 +136,6 @@ new Vue( {
         },
 
         filterLlst: function () {
-
-            //? Generate link for poster and background
-            this.poster = this.posterHead + this.filterLlst.poster_path;
-            this.bg.backgroundImage = 'url(https://image.tmdb.org/t/p/original' + this.filterLlst.backdrop_path; + ')';
-
             //! Fetch full imovie info  with move ID
             const urlId = 'https://api.themoviedb.org/3/movie/' + this.filterLlst.id + '?api_key=da4d11234eb9fbd69aa0dd7c6323eff9'
             fetch( urlId )
@@ -142,32 +145,71 @@ new Vue( {
                 .then( ( data ) => {
                     this.fullInfo = data;
                 } );
+        },
+        fullInfo: function () {
+            //? Generate link for poster
+            if ( this.fullInfo.poster_path != null ) {
+                this.poster = this.imgHead + this.fullInfo.poster_path;
+            } else {
+                this.poster = 'img/404PosterNotFound.jpg';
+            }
 
+            //? Generate link for background
+            if ( this.fullInfo.backdrop_path != null ) {
+                this.bg.backgroundImage = 'url(' + this.imgHead + this.fullInfo.backdrop_path + ')';
+            } else {
+                this.bg.backgroundImage = 'url(img/404bgNotFound.jpg)';
+            }
         }
     },
     computed: {
-
         //? filter list for movie title
-        filteredList() {
-            if ( this.keyword != '' ) {
-                return this.movieList.filter( list => {
-                    return list.title.toLowerCase().includes( this.keyword.toLowerCase() );
-                } )
-            }
+        filteredList: function () {
+            return this.movieList.filter( list => {
+                return list.title.toLowerCase().includes( this.keyword.toLowerCase() );
+            } )
         },
 
-        //? get first to types of genre
-        getGenres() {
-            var a = this.fullInfo.genres[ 0 ].name + '&nbsp;&nbsp;' + this.fullInfo.genres[ 1 ].name;
-            return a;
-        }
-
+        //todo   Get first to types of genre if avilable alse output message
+        getGenres: function () {
+            if ( this.fullInfo.genres.length > 0 ) {
+                return this.fullInfo.genres[ 0 ].name;
+            } else {
+                return "No info"
+            }
+        },
+        //todo   Get runtime if avilable alse output message
+        getRunTime() {
+            if ( this.fullInfo.runtime != 0 ) {
+                return this.fullInfo.runtime + " minutes";
+            } else {
+                return 'no data'
+            }
+        },
+        //todo   Get budget if avilable alse output message
+        getBoxoffice() {
+            if ( this.fullInfo.budget != 0 ) {
+                return this.fullInfo.budget;
+            } else {
+                return 'no data'
+            }
+        },
+        //todo   Get raiting if avilable alse output message
+        getRating() {
+            if ( this.fullInfo.vote_average != 0 ) {
+                return this.fullInfo.vote_average;
+            } else {
+                return 'no data'
+            }
+        },
     },
 
     //? generate poster/bg on load
     created() {
-        this.poster = this.posterHead + this.fullInfo.poster_path;
-        this.bg.backgroundImage = 'url(https://image.tmdb.org/t/p/original' + this.fullInfo.backdrop_path; + ')';
-    }
+        this.poster = this.imgHead + this.fullInfo.poster_path;
+        this.bg.backgroundImage = 'url(' + this.imgHead + this.fullInfo.backdrop_path; + ')';
 
+        //* custom event on arrow up/down keys
+        document.addEventListener( "keyup", this.nextItem );
+    }
 }, )

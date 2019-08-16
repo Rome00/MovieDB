@@ -47,13 +47,17 @@
                                                     <div class="search-filter border-0">
                                                         <input class="form-control form-control-sm ml-sm-4 border-0"
                                                             type="text" placeholder="Enter the movie name..."
-                                                            v-model="keyword" @:keyup.enter="getList">
+                                                            v-model="keyword" @keyup.enter="movieEnter">
                                                         <ul class="list-group list-group-flush" v-if="isTrue">
                                                             <li class="list-group-item"
                                                                 v-for="(list, index) in filteredList" :key="index"
-                                                                @click="getMovie(index)">{{ list.title }}
+                                                                :class="{'active': currentItem === index}"
+                                                                @click="getMovie(index)" 
+                                                                @mouseover="itemIndex(index)"  
+                                                                @keyup="nextItem">
+                                                                {{ list.title }}
                                                                 <span class="search-prew"
-                                                                    :style="{ backgroundImage: 'url(' + posterHead + list.poster_path + ')' }"></span>
+                                                                    :style="{ backgroundImage: 'url(' + imgHead + list.poster_path + ')' }"></span>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -98,7 +102,7 @@
                                                                 <div
                                                                     class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">ganre</div>
-                                                                    <div class="text" v-html="getGenres"></div>
+                                                                    <div class="text"> {{ getGenres }} </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -107,7 +111,7 @@
                                                                 <div
                                                                     class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">runtime</div>
-                                                                    <div class="text">{{fullInfo.runtime}} minutes</div>
+                                                                    <div class="text">{{ getRunTime }}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -116,7 +120,7 @@
                                                                 <div
                                                                     class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">box offiec</div>
-                                                                    <div class="text">$ {{ fullInfo.budget }}</div>
+                                                                    <div class="text">$ {{ getBoxoffice }}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -131,7 +135,7 @@
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
-                                                                        <span>{{ fullInfo.vote_average }}</span>
+                                                                        <span>{{ getRating }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
