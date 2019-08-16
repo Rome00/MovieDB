@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Circula';
+    src: url('Circula-Medium.eot');
+    src: local('Circula Medium'), local('Circula-Medium'),
+        url('Circula-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Circula-Medium.woff2') format('woff2'),
+        url('Circula-Medium.woff') format('woff'),
+        url('Circula-Medium.ttf') format('truetype'),
+        url('Circula-Medium.svg#Circula-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
