@@ -97,10 +97,8 @@ new Vue( {
         nextItem() {
             if ( event.keyCode == 38 && this.currentItem > 0 ) {
                 this.currentItem--
-                console.log( this.currentItem );
             } else if ( event.keyCode == 40 && this.currentItem < this.movieList.length ) {
                 this.currentItem++;
-                console.log( this.currentItem );
             }
         },
         movieEnter() {
@@ -111,7 +109,6 @@ new Vue( {
         },
         itemIndex( index ) {
             this.currentItem = index;
-            console.log( index )
         }
     },
     watch: {
@@ -162,7 +159,7 @@ new Vue( {
             }
         }
     },
-    computed: {
+    computed: { 
         //? filter list for movie title
         filteredList: function () {
             return this.movieList.filter( list => {
