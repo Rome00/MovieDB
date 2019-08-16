@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/f43178f547.js"></script>
+    <link rel="stylesheet" href="Sass/css/style.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="movie-bg">
+                <div class="row">
+                    <div class="col-lg-12 no-padding">
+                        <div class="bg-section container-fluid">
+                            <div class="row ">
+                                <div class="col-lg-4 aside no-padding">
+                                    <div class="aside-bg"></div>
+                                </div>
+                                <div class="col-lg-8 bg-poster no-padding" :style="bg">
+                                    <div class="bg-cover"></div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="container main-conten">
+                                        <!-- nav section -->
+                                        <nav class="navbar custom-nav navbar-expand-lg navbar-light bg-transparent">
+                                            <a class="navbar-brand" href="#">
+                                                <img src="img/Logo.png" alt="the movieDB">
+                                            </a>
+                                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                                data-target="#navbarSupportedContent"
+                                                aria-controls="navbarSupportedContent" aria-expanded="false"
+                                                aria-label="Toggle navigation">
+                                                <span class="navbar-toggler-icon"></span>
+                                            </button>
+                                            <div class="collapse navbar-collapse justify-content-lg-end justify-content-center"
+                                                id="navbarSupportedContent">
+                                                <form class="form-inline my-2 my-lg-0" v-on:submit.prevent>
+                                                    <div class="my-2 my-sm-0 d-sm-none d-md-block search-icon"></div>
+                                                    <div class="search-filter border-0">
+                                                        <input class="form-control form-control-sm ml-sm-4 border-0"
+                                                            type="text" placeholder="Enter the movie name..."
+                                                            v-model="keyword" @:keyup.enter="getList">
+                                                        <ul class="list-group list-group-flush" v-if="isTrue">
+                                                            <li class="list-group-item"
+                                                                v-for="(list, index) in filteredList" :key="index"
+                                                                @click="getMovie(index)">{{ list.title }}
+                                                                <span class="search-prew"
+                                                                    :style="{ backgroundImage: 'url(' + posterHead + list.poster_path + ')' }"></span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </nav>
+                                        <div class="movie-content">
+                                            <div class="row">
+                                                <div class="col-lg-5 col-12">
+                                                    <div class="poster-box">
+                                                        <img :src="poster" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 col-12 pl-lg-70 mt-md-10 pl-md-0">
+                                                    <h1 class="title"> {{ fullInfo.original_title }} </h1>
+                                                    <div class="quote">
+                                                        {{ fullInfo.tagline }}
+                                                    </div>
+                                                    <p class="overview">{{ fullInfo.overview }}</p>
+                                                    <div class="movie-states">
+                                                        <div class="movie-popular float-left">
+                                                            <div class="score-box">60</div>
+                                                            <div class="score-titles">
+                                                                <div class="sub-tiltle">METASCORE</div>
+                                                                <div class="imdb"><span>From</span> IMDB.COM</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="movie-popular float-left">
+                                                            <div class="trend-img">
+                                                                <img class="img-fluid" src="img/trending.png"
+                                                                    alt="movie tranging">
+                                                            </div>
+                                                            <div class="score-titles">
+                                                                <div class="sub-tiltle">POPULARITY</div>
+                                                                <div class="rating">{{ fullInfo.popularity }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row moreInfo">
+                                                        <div class="col-lg-6">
+                                                            <div class="ganre mb-30">
+                                                                <div
+                                                                    class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
+                                                                    <div class="title">ganre</div>
+                                                                    <div class="text" v-html="getGenres"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="runtime mb-30">
+                                                                <div
+                                                                    class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
+                                                                    <div class="title">runtime</div>
+                                                                    <div class="text">{{fullInfo.runtime}} minutes</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="box-office mr-35 mb-30">
+                                                                <div
+                                                                    class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
+                                                                    <div class="title">box offiec</div>
+                                                                    <div class="text">$ {{ fullInfo.budget }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="vote mb-30">
+                                                                <div
+                                                                    class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
+                                                                    <div class="title">vote avarage</div>
+                                                                    <div class="text">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <span>{{ fullInfo.vote_average }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap 4.3 -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <!-- Vue -->
+    <script src="Js/app.js"></script>
+</body>
+
+</html>
