@@ -20,7 +20,7 @@
             .bg-cover {
                 height: 100%;
                 width: 100%;
-                background-color: rgba(255, 255, 255, 0.7);
+                background-color: rgba(255, 255, 255, 0.9);
             }
         }
 
@@ -62,6 +62,7 @@
         .search-filter {
             position: relative;
 
+
             ul {
                 z-index: 9999;
                 position: absolute;
@@ -87,11 +88,13 @@
                     border-radius: 10px;
                 }
 
+                .active {
+                    background: #41b883;
+                    color: #fff;
+                }
+
                 li {
                     position: relative;
-                    display: flex;
-                    align-items: center;
-                    justify-content: end;
                     cursor: pointer;
                     color: #E98202;
                     background: rgba(255, 255, 255, 0.9);
@@ -99,6 +102,7 @@
                     span {
                         height: 35px;
                         width: 45px;
+                        border-radius: 4px;
                         display: block;
                         position: absolute;
                         right: 10px;
@@ -119,12 +123,13 @@
 
         .navbar-collapse .search-icon {
             /* Style for "search" */
-            width: 26px;
-            height: 26px;
+            width: 30px;
+            height: 30px;
             background-image: url('../../img/search.png');
             background-repeat: no-repeat;
             background-position: center;
             border: none;
+            background-color: transparent;
 
         }
 
