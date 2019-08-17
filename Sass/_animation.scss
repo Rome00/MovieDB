@@ -1,0 +1,156 @@
+@import './variables';
+
+// Ripple 
+@keyframes ripple {
+    100% {
+        top: -12px;
+        bottom: -12px;
+        left: -12px;
+        right: -12px;
+        opacity: 0;
+    }
+}
+
+.ripple {
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        animation-duration: 1s;
+    }
+
+    &:hover::before {
+        animation-name: ripple;
+        border: $lightGreen solid 3px;
+    }
+}
+
+// bounse
+@keyframes bounceInUp {
+
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    from {
+        opacity: 0;
+        transform: translate3d(0, 3000px, 0);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0);
+    }
+
+    75% {
+        transform: translate3d(0, 10px, 0);
+    }
+
+    90% {
+        transform: translate3d(0, -5px, 0);
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+// swing
+@keyframes swing {
+    20% {
+        transform: rotate3d(0, 0, 1, 10deg);
+    }
+
+    40% {
+        transform: rotate3d(0, 0, 1, -10deg);
+    }
+
+    60% {
+        transform: rotate3d(0, 0, 1, 2deg);
+    }
+
+    80% {
+        transform: rotate3d(0, 0, 1, -2deg);
+    }
+
+    to {
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+}
+
+// zoom in 
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+//zoom out 
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+// rubber
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    50% {
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+//! title animation
+.pulse-enter-active {
+    animation: pulse 1s;
+}
+
+//! tagline animation
+.swing-enter-active {
+    animation: swing 1s;
+}
+
+
+//! zoom in/out text
+.zoom-enter-active {
+    animation: zoomIn 1s;
+}
+
+
+.bounceInUp-enter-active {
+    animation: bounceInUp 1s;
+    animation-delay: 0.5s;
+}

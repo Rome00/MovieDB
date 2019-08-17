@@ -1,5 +1,7 @@
 @import './global';
 @import './fonts';
+@import './variables';
+@import './animation';
 
 
 
@@ -20,7 +22,7 @@
             .bg-cover {
                 height: 100%;
                 width: 100%;
-                background-color: rgba(255, 255, 255, 0.9);
+                background-color: rgba($white, 0.9);
             }
         }
 
@@ -31,8 +33,8 @@
             height: auto;
             display: flex;
             align-items: center;
-            background-color: #ed6c00;
-            background-image: linear-gradient(to top, #ee6c02 0%, #e98402 100%);
+            background-color: $orange;
+            background-image: linear-gradient(to top, $orange 0%, $lightOrange 100%);
 
             .aside-bg {
                 width: 100%;
@@ -69,8 +71,9 @@
                 right: 0;
                 top: 50px;
                 left: 24px;
-                border-left: 3px solid #E98202;
+                border-left: 3px solid $orange;
                 overflow-y: scroll;
+                overflow-x: hidden;
                 height: auto;
                 max-height: 295px;
 
@@ -79,25 +82,28 @@
                 }
 
                 &::-webkit-scrollbar-track {
-                    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                    box-shadow: inset 0 0 6px rgba($black, 0.3);
                 }
 
                 &::-webkit-scrollbar-thumb {
-                    background-color: darkgrey;
-                    outline: 1px solid slategrey;
+                    background-color: $darkgrey;
+                    outline: 1px solid $slateGrey;
                     border-radius: 10px;
                 }
 
-                .active {
-                    background: #41b883;
-                    color: #fff;
+                .list-group-item.active {
+                    background: $lightGreen;
+                    color: $white;
+                    border-color: transparent;
+                    animation-name: ripple;
+                    border: $lightGreen solid 3px;
                 }
 
                 li {
                     position: relative;
                     cursor: pointer;
-                    color: #E98202;
-                    background: rgba(255, 255, 255, 0.9);
+                    color: $lightOrange;
+                    background: rgba($white, 0.9);
 
                     span {
                         height: 35px;
@@ -113,9 +119,9 @@
                     }
 
                     &:hover {
-                        background: #41b883;
+                        background: $lightGreen;
                         outline: none;
-                        color: #fff;
+                        color: $white;
                     }
                 }
             }
@@ -137,7 +143,7 @@
             height: 46px;
             outline: none;
             box-shadow: none;
-            color: #b4b4b4;
+            color: lightBordo;
             font-size: 30px;
             font-weight: 400;
             line-height: 100px;
@@ -148,7 +154,7 @@
         margin-top: 90px;
 
         .title {
-            color: #000000;
+            color: $black;
             font-size: 42px;
             font-weight: 500;
         }
@@ -157,7 +163,7 @@
             overflow: hidden;
             height: 100%;
             max-height: 715px;
-            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.09);
+            box-shadow: 0 50px 100px rgba($black, 0.09);
             border-radius: 13px;
             object-fit: cover;
 
@@ -173,16 +179,16 @@
             background-repeat: no-repeat;
             background-position: top right;
             border-left: 4px solid;
-            border-left-color: #ec6a00;
+            border-left-color: $orange;
             padding: 0 30px 0 24px;
-            color: #ec6a00;
+            color: $orange;
             font-size: 24px;
             font-weight: 400;
             margin: 40px 0;
         }
 
         .overview {
-            color: #494949;
+            color: $darkerGrey;
             font-size: 18px;
             font-weight: 400;
             line-height: 30px;
@@ -205,11 +211,11 @@
                     height: 60px;
                     text-align: center;
                     border-radius: 10px;
-                    background-color: #ee9802;
+                    background-color: $lightOrange;
                     font-size: 20px;
                     font-weight: 700;
                     line-height: 60px;
-                    color: #ffffff;
+                    color: $white;
                 }
 
                 .score-titles {
@@ -219,7 +225,7 @@
                     margin-left: 25px;
 
                     .sub-tiltle {
-                        color: #494949;
+                        color: $darkerGrey;
                         ;
                         font-size: 14px;
                         font-weight: 700;
@@ -228,21 +234,21 @@
                     }
 
                     .rating {
-                        color: #0f1011;
+                        color: $darkerGrey;
                         font-size: 18px;
                         font-weight: 700;
                         line-height: 30px
                     }
 
                     .imdb {
-                        color: #0f1011;
+                        color: $darkerGrey;
                         font-size: 18px;
                         font-weight: 700;
                         line-height: 30px;
 
                         span {
                             /* Text style for "From" */
-                            color: #494949;
+                            color: $lightBordo;
                             ;
                             ;
                             font-family: "Circular Std - Book";
@@ -260,7 +266,7 @@
                 }
 
                 .movie-popularity {
-                    color: #888888;
+                    color: $lightGrey;
                     font-size: 14px;
                     font-weight: 700;
                     line-height: 30px;
@@ -271,15 +277,27 @@
 
         .moreInfo {
             .title {
-                color: #ece0da;
+                color: $darkerWhite;
                 font-size: 14px;
                 font-weight: 700;
                 text-transform: uppercase;
+                padding-bottom: 8px;
+            }
+
+            .genres {
+                display: contents;
+                color: $white;
+                font-weight: 600;
+
+                span {
+                    display: contents;
+                }
             }
 
             .text {
+                display: flex;
                 padding-top: 10px;
-                color: #ffffff;
+                color: $white;
                 font-size: 20px;
                 font-weight: 700;
                 line-height: 30px;
@@ -288,17 +306,22 @@
                     margin-left: 10px;
                 }
 
-                i {
-                    color: #fffefd;
-                    font-size: 20px;
+                .icons {
+                    display: inline-block;
+
+                    i {
+                        color: $darkerWhite;
+                        font-size: 20px;
+                    }
                 }
+
             }
         }
 
         .ganre {
             height: 100px;
             border-radius: 10px;
-            background-color: #000308;
+            background-color: $black;
 
             .box-bg {
                 height: 100%;
@@ -312,7 +335,7 @@
         .runtime {
             height: 100px;
             border-radius: 10px;
-            background-color: #ee6c02;
+            background-color: $orange;
 
             .box-bg {
                 height: 100%;
@@ -326,7 +349,7 @@
         .box-office {
             height: 100px;
             border-radius: 10px;
-            background-color: #00755e;
+            background-color: $green;
 
             .box-bg {
                 height: 100%;
@@ -340,7 +363,7 @@
         .vote {
             height: 100px;
             border-radius: 10px;
-            background-color: #bca79c;
+            background-color: $lightBordo;
 
             .box-bg {
                 height: 100%;

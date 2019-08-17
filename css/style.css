@@ -20,8 +20,8 @@ body {
   margin-bottom: 30px;
 }
 
-.p-26-30 {
-  padding: 26px 0px 26px 30px;
+.p-22-30 {
+  padding: 22px 10px 22px 30px;
 }
 
 @font-face {
@@ -30,6 +30,265 @@ body {
   src: local("Circula Medium"), local("Circula-Medium"), url("fonts/Circula-Medium.eot?#iefix") format("embedded-opentype"), url("fonts/Circula-Medium.woff2") format("woff2"), url("fonts/Circula-Medium.woff") format("woff"), url("fonts/Circula-Medium.ttf") format("truetype"), url("fonts/Circula-Medium.svg#Circula-Medium") format("svg");
   font-weight: 500;
   font-style: normal;
+}
+
+@-webkit-keyframes ripple {
+  100% {
+    top: -12px;
+    bottom: -12px;
+    left: -12px;
+    right: -12px;
+    opacity: 0;
+  }
+}
+
+@keyframes ripple {
+  100% {
+    top: -12px;
+    bottom: -12px;
+    left: -12px;
+    right: -12px;
+    opacity: 0;
+  }
+}
+
+.ripple {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+          transform: perspective(1px) translateZ(0);
+  position: relative;
+}
+
+.ripple::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+.ripple:hover::before {
+  -webkit-animation-name: ripple;
+          animation-name: ripple;
+  border: #41b883 solid 3px;
+}
+
+@-webkit-keyframes bounceInUp {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3000px, 0);
+            transform: translate3d(0, 3000px, 0);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -20px, 0);
+            transform: translate3d(0, -20px, 0);
+  }
+  75% {
+    -webkit-transform: translate3d(0, 10px, 0);
+            transform: translate3d(0, 10px, 0);
+  }
+  90% {
+    -webkit-transform: translate3d(0, -5px, 0);
+            transform: translate3d(0, -5px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bounceInUp {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3000px, 0);
+            transform: translate3d(0, 3000px, 0);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -20px, 0);
+            transform: translate3d(0, -20px, 0);
+  }
+  75% {
+    -webkit-transform: translate3d(0, 10px, 0);
+            transform: translate3d(0, 10px, 0);
+  }
+  90% {
+    -webkit-transform: translate3d(0, -5px, 0);
+            transform: translate3d(0, -5px, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes swing {
+  20% {
+    -webkit-transform: rotate3d(0, 0, 1, 10deg);
+            transform: rotate3d(0, 0, 1, 10deg);
+  }
+  40% {
+    -webkit-transform: rotate3d(0, 0, 1, -10deg);
+            transform: rotate3d(0, 0, 1, -10deg);
+  }
+  60% {
+    -webkit-transform: rotate3d(0, 0, 1, 2deg);
+            transform: rotate3d(0, 0, 1, 2deg);
+  }
+  80% {
+    -webkit-transform: rotate3d(0, 0, 1, -2deg);
+            transform: rotate3d(0, 0, 1, -2deg);
+  }
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+            transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+@keyframes swing {
+  20% {
+    -webkit-transform: rotate3d(0, 0, 1, 10deg);
+            transform: rotate3d(0, 0, 1, 10deg);
+  }
+  40% {
+    -webkit-transform: rotate3d(0, 0, 1, -10deg);
+            transform: rotate3d(0, 0, 1, -10deg);
+  }
+  60% {
+    -webkit-transform: rotate3d(0, 0, 1, 2deg);
+            transform: rotate3d(0, 0, 1, 2deg);
+  }
+  80% {
+    -webkit-transform: rotate3d(0, 0, 1, -2deg);
+            transform: rotate3d(0, 0, 1, -2deg);
+  }
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+            transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+@-webkit-keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3);
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3);
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05);
+  }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05);
+  }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse-enter-active {
+  -webkit-animation: pulse 1s;
+          animation: pulse 1s;
+}
+
+.swing-enter-active {
+  -webkit-animation: swing 1s;
+          animation: swing 1s;
+}
+
+.zoom-enter-active {
+  -webkit-animation: zoomIn 1s;
+          animation: zoomIn 1s;
+}
+
+.bounceInUp-enter-active {
+  -webkit-animation: bounceInUp 1s;
+          animation: bounceInUp 1s;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
 }
 
 .movie-bg {
@@ -63,7 +322,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #ed6c00;
+  background-color: #ee6c02;
   background-image: -webkit-gradient(linear, left bottom, left top, from(#ee6c02), to(#e98402));
   background-image: linear-gradient(to top, #ee6c02 0%, #e98402 100%);
 }
@@ -99,8 +358,9 @@ body {
   right: 0;
   top: 50px;
   left: 24px;
-  border-left: 3px solid #E98202;
+  border-left: 3px solid #ee6c02;
   overflow-y: scroll;
+  overflow-x: hidden;
   height: auto;
   max-height: 295px;
 }
@@ -115,20 +375,24 @@ body {
 }
 
 .main-conten .custom-nav .search-filter ul::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
+  background-color: #a9a9a9;
+  outline: 1px solid #708090;
   border-radius: 10px;
 }
 
-.main-conten .custom-nav .search-filter ul .active {
+.main-conten .custom-nav .search-filter ul .list-group-item.active {
   background: #41b883;
   color: #fff;
+  border-color: transparent;
+  -webkit-animation-name: ripple;
+          animation-name: ripple;
+  border: #41b883 solid 3px;
 }
 
 .main-conten .custom-nav .search-filter ul li {
   position: relative;
   cursor: pointer;
-  color: #E98202;
+  color: #e98402;
   background: rgba(255, 255, 255, 0.9);
 }
 
@@ -167,7 +431,7 @@ body {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
-  color: #b4b4b4;
+  color: lightBordo;
   font-size: 30px;
   font-weight: 400;
   line-height: 100px;
@@ -178,7 +442,7 @@ body {
 }
 
 .main-conten .movie-content .title {
-  color: #000000;
+  color: #000;
   font-size: 42px;
   font-weight: 500;
 }
@@ -204,16 +468,16 @@ body {
   background-repeat: no-repeat;
   background-position: top right;
   border-left: 4px solid;
-  border-left-color: #ec6a00;
+  border-left-color: #ee6c02;
   padding: 0 30px 0 24px;
-  color: #ec6a00;
+  color: #ee6c02;
   font-size: 24px;
   font-weight: 400;
   margin: 40px 0;
 }
 
 .main-conten .movie-content .overview {
-  color: #494949;
+  color: #736862;
   font-size: 18px;
   font-weight: 400;
   line-height: 30px;
@@ -242,11 +506,11 @@ body {
   height: 60px;
   text-align: center;
   border-radius: 10px;
-  background-color: #ee9802;
+  background-color: #e98402;
   font-size: 20px;
   font-weight: 700;
   line-height: 60px;
-  color: #ffffff;
+  color: #fff;
 }
 
 .main-conten .movie-content .movie-states .movie-popular .score-titles {
@@ -264,7 +528,7 @@ body {
 }
 
 .main-conten .movie-content .movie-states .movie-popular .score-titles .sub-tiltle {
-  color: #494949;
+  color: #736862;
   font-size: 14px;
   font-weight: 700;
   line-height: 30px;
@@ -272,14 +536,14 @@ body {
 }
 
 .main-conten .movie-content .movie-states .movie-popular .score-titles .rating {
-  color: #0f1011;
+  color: #736862;
   font-size: 18px;
   font-weight: 700;
   line-height: 30px;
 }
 
 .main-conten .movie-content .movie-states .movie-popular .score-titles .imdb {
-  color: #0f1011;
+  color: #736862;
   font-size: 18px;
   font-weight: 700;
   line-height: 30px;
@@ -287,7 +551,7 @@ body {
 
 .main-conten .movie-content .movie-states .movie-popular .score-titles .imdb span {
   /* Text style for "From" */
-  color: #494949;
+  color: #bca79c;
   font-family: "Circular Std - Book";
   font-weight: 400;
 }
@@ -318,11 +582,25 @@ body {
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
+  padding-bottom: 8px;
+}
+
+.main-conten .movie-content .moreInfo .genres {
+  display: contents;
+  color: #fff;
+  font-weight: 600;
+}
+
+.main-conten .movie-content .moreInfo .genres span {
+  display: contents;
 }
 
 .main-conten .movie-content .moreInfo .text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   padding-top: 10px;
-  color: #ffffff;
+  color: #fff;
   font-size: 20px;
   font-weight: 700;
   line-height: 30px;
@@ -332,15 +610,19 @@ body {
   margin-left: 10px;
 }
 
-.main-conten .movie-content .moreInfo .text i {
-  color: #fffefd;
+.main-conten .movie-content .moreInfo .text .icons {
+  display: inline-block;
+}
+
+.main-conten .movie-content .moreInfo .text .icons i {
+  color: #ece0da;
   font-size: 20px;
 }
 
 .main-conten .movie-content .ganre {
   height: 100px;
   border-radius: 10px;
-  background-color: #000308;
+  background-color: #000;
 }
 
 .main-conten .movie-content .ganre .box-bg {
