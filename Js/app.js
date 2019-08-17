@@ -183,3 +183,10 @@ new Vue( {
         document.addEventListener( "keyup", this.nextItem );
     }
 }, )
+
+
+const burger = document.querySelector( '.navbar-toggler' );
+
+burger.addEventListener( 'click', () => {
+    burger.classList.toggle( 'Burgeractive' );
+} );
