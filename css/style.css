@@ -323,8 +323,6 @@ body {
       -ms-flex-align: center;
           align-items: center;
   background-color: #ee6c02;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#ee6c02), to(#e98402));
-  background-image: linear-gradient(to top, #ee6c02 0%, #e98402 100%);
 }
 
 .movie-bg .bg-section .aside .aside-bg {
@@ -682,6 +680,64 @@ body {
 }
 
 @media screen and (max-width: 992px) {
+  .navbar-light .navbar-toggler {
+    border-color: transparent;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border: none;
+    outline: none;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    cursor: pointer;
+  }
+  .navbar-light .navbar-toggler span {
+    width: 40px;
+    margin: 4px;
+    height: 4px;
+    background-color: #fff;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+  }
+  .navbar-light .navbar-toggler span:nth-child(2) {
+    width: 30px;
+  }
+  .navbar .navbar-nav-active {
+    height: 100vh;
+    opacity: 0.8;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  .navbar .Burgeractive .line1 {
+    -webkit-transform: rotate(-45deg) translate(-13px, 10px);
+            transform: rotate(-45deg) translate(-13px, 10px);
+    background: #41b883;
+  }
+  .navbar .Burgeractive .line2 {
+    z-index: 99999;
+    opacity: 0;
+  }
+  .navbar .Burgeractive .line3 {
+    -webkit-transform: rotate(45deg) translate(-6px, -5px);
+            transform: rotate(45deg) translate(-6px, -5px);
+    background: #41b883;
+  }
+  .toggler-icon {
+    width: 40px;
+    margin: 4px;
+    height: 4px;
+    background-color: #fff;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+  }
   .main-conten .movie-content .poster-box {
     max-height: 850px;
     display: -webkit-box;
@@ -694,6 +750,16 @@ body {
   .main-conten .movie-content .poster-box img {
     width: auto;
   }
+  .movie-bg .bg-section .aside {
+    bottom: 50%;
+    height: 100%;
+    width: 100%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+  .movie-bg .bg-section .bg-poster {
+    top: 50%;
+  }
   .navbar-collapse {
     background: rgba(0, 0, 0, 0.2);
     padding: 10px 30px;
@@ -701,9 +767,6 @@ body {
   }
   .main-conten .custom-nav .navbar-collapse input {
     width: 90%;
-  }
-  .movie-bg .bg-section .aside {
-    max-height: 996px;
   }
   .mt-md-10 {
     margin-top: 10rem;
