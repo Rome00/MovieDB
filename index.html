@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/f43178f547.js"></script>
     <link rel="stylesheet" href="Sass/css/style.min.css">
-    <title>Document</title>
+    <title>The MovieDb Search</title>
 </head>
 
 <body>
@@ -48,13 +49,12 @@
                                                         <input class="form-control form-control-sm ml-sm-4 border-0"
                                                             type="text" placeholder="Enter the movie name..."
                                                             v-model="keyword" @keyup.enter="movieEnter">
-                                                        <ul class="list-group list-group-flush" v-if="isTrue">
-                                                            <li class="list-group-item"
+                                                        <ul class="list-group" v-if="isTrue">
+                                                            <li class="list-group-item ripple"
                                                                 v-for="(list, index) in filteredList" :key="index"
                                                                 :class="{'active': currentItem === index}"
-                                                                @click="getMovie(index)" 
-                                                                @mouseover="itemIndex(index)"  
-                                                                @keyup="nextItem">
+                                                                @click="getMovie(index)" @mouseover="itemIndex(index)"
+                                                                @keyup="nextItem" tabindex="0">
                                                                 {{ list.title }}
                                                                 <span class="search-prew"
                                                                     :style="{ backgroundImage: 'url(' + imgHead + list.poster_path + ')' }"></span>
@@ -72,11 +72,19 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-7 col-12 pl-lg-70 mt-md-10 pl-md-0">
-                                                    <h1 class="title"> {{ fullInfo.original_title }} </h1>
-                                                    <div class="quote">
-                                                        {{ fullInfo.tagline }}
-                                                    </div>
-                                                    <p class="overview">{{ fullInfo.overview }}</p>
+                                                    <transition name="pulse">
+                                                        <h1 class="title" :key="fullInfo.original_title">
+                                                            {{ fullInfo.original_title }} </h1>
+                                                    </transition>
+                                                    <transition name="swing">
+                                                        <div class="quote" :key="fullInfo.tagline">
+                                                            {{ fullInfo.tagline }}
+                                                        </div>
+                                                    </transition>
+                                                    <transition name="zoom">
+                                                        <p class="overview" :key="fullInfo.overview">
+                                                            {{ fullInfo.overview }}</p>
+                                                    </transition>
                                                     <div class="movie-states">
                                                         <div class="movie-popular float-left">
                                                             <div class="score-box">60</div>
@@ -100,43 +108,60 @@
                                                         <div class="col-lg-6">
                                                             <div class="ganre mb-30">
                                                                 <div
-                                                                    class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
+                                                                    class="box-bg p-22-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">ganre</div>
-                                                                    <div class="text"> {{ getGenres }} </div>
+                                                                    <transition-group name="bounceInUp" tag="div">
+                                                                        <span class="genres"
+                                                                            v-for="item in fullInfo.genres"
+                                                                            :key="item.id">
+                                                                            {{ item.name }}
+                                                                        </span>
+                                                                    </transition-group>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="runtime mb-30">
                                                                 <div
-                                                                    class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
+                                                                    class="box-bg p-22-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">runtime</div>
-                                                                    <div class="text">{{ getRunTime }}</div>
+                                                                    <transition name="bounceInUp">
+                                                                        <div class="text" :key="getRunTime">
+                                                                            {{ getRunTime }}</div>
+                                                                    </transition>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="box-office mr-35 mb-30">
                                                                 <div
-                                                                    class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
+                                                                    class="box-bg p-22-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">box offiec</div>
-                                                                    <div class="text">$ {{ getBoxoffice }}</div>
+                                                                    <transition name="bounceInUp">
+                                                                        <div class="text" :key="getBoxoffice">
+                                                                            {{ getBoxoffice }}</div>
+                                                                    </transition>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="vote mb-30">
                                                                 <div
-                                                                    class="box-bg p-26-30 d-flex align-items flex-column justify-content-between">
+                                                                    class="box-bg p-22-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">vote avarage</div>
-                                                                    <div class="text">
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <span>{{ getRating }}</span>
-                                                                    </div>
+                                                                    <transition name="bounceInUp">
+                                                                        <div class="text" :key="getRating">
+                                                                            <div class="icons"
+                                                                                v-if="getRating !== 'no data'">
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                            </div>
+                                                                            <span>{{ getRating }}</span>
+                                                                        </div>
+                                                                    </transition>
                                                                 </div>
                                                             </div>
                                                         </div>
