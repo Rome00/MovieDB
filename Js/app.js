@@ -48,8 +48,7 @@ new Vue( {
             backgroundSize: "cover"
         },
         imgHead: 'https://image.tmdb.org/t/p/original',
-        currentItem: 0,
-        MovieGenre: []
+        currentItem: 0
     },
     methods: {
         //! Select movie from randered list by index,
@@ -146,7 +145,6 @@ new Vue( {
                 } )
             }
         },
-
         //todo   Get runtime if avilable alse output message
         getRunTime() {
             if ( this.fullInfo.runtime != 0 && this.fullInfo.runtime != null ) {
@@ -183,10 +181,3 @@ new Vue( {
         document.addEventListener( "keyup", this.nextItem );
     }
 }, )
-
-
-const burger = document.querySelector( '.navbar-toggler' );
-
-burger.addEventListener( 'click', () => {
-    burger.classList.toggle( 'Burgeractive' );
-} );

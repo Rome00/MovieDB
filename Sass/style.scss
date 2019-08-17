@@ -63,6 +63,9 @@
         .search-filter {
             position: relative;
 
+            .search-list {
+                display: none;
+            }
 
             ul {
                 z-index: 9999;
@@ -111,7 +114,8 @@
                         display: block;
                         position: absolute;
                         right: 10px;
-                        top: 8px;
+                        top: 50%;
+                        transform: translateY(-50%);
                         background-position: center;
                         background-repeat: no-repeat;
                         background-size: cover;

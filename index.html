@@ -10,6 +10,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Movies Search WebApp" />
     <meta property="og:description" content="Get Movie info, search movies in The Movie Database" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <meta property="og:image" content="https://image.tmdb.org/t/p/original/q2mwTRKrq1etP9S4SZVDIJq0wI2.jpg" />
     <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -44,7 +45,8 @@
                                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                                 data-target="#navbarSupportedContent"
                                                 aria-controls="navbarSupportedContent" aria-expanded="false"
-                                                aria-label="Toggle navigation">
+                                                aria-label="Toggle navigation" :class="{'Burgeractive': !show}"
+                                                @click="show =! show">
                                                 <span class="line1"></span>
                                                 <span class="line2"></span>
                                                 <span class="line3"></span>
@@ -54,7 +56,7 @@
                                                 <form
                                                     class="form-inline my-2 my-lg-0 justify-content-center justify-content-lg-start"
                                                     v-on:submit.prevent>
-                                                    <div class="my-2 my-sm-0 d-sm-none d-md-block search-icon"></div>
+                                                    <div class="my-2 my-sm-0 d-none d-md-block search-icon"></div>
                                                     <div class="search-filter border-0">
                                                         <input class="form-control form-control-sm ml-sm-4 border-0"
                                                             type="text" placeholder="Enter the movie name..."
@@ -76,9 +78,9 @@
                                         </nav>
                                         <div class="movie-content">
                                             <div class="row">
-                                                <div class="col-lg-5 col-12 mt-5 mt-lg-0">
-                                                    <div class="poster-box">
-                                                        <img :src="poster" alt="">
+                                                <div class="col-lg-5 col-12 mt-5 mt-lg-0 an">
+                                                    <div class="poster-box animated fadeInLeft">
+                                                        <img :src="poster" :alt="fullInfo.original_title">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-7 col-12 pl-lg-70 mt-md-10">
@@ -86,7 +88,7 @@
                                                         <h1 class="title" :key="fullInfo.original_title">
                                                             {{ fullInfo.original_title }} </h1>
                                                     </transition>
-                                                    <transition name="swing">
+                                                    <transition name="zoomTagline">
                                                         <div class="quote" :key="fullInfo.tagline">
                                                             {{ fullInfo.tagline }}
                                                         </div>
@@ -116,7 +118,8 @@
                                                     </div>
                                                     <div class="row moreInfo">
                                                         <div class="col-lg-6">
-                                                            <div class="ganre mb-30">
+                                                            <div
+                                                                class="ganre mb-30 animated fadeInUpBig fadeInDelayTop">
                                                                 <div
                                                                     class="box-bg p-22-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">ganre</div>
@@ -131,7 +134,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <div class="runtime mb-30">
+                                                            <div
+                                                                class="runtime mb-30 animated fadeInUpBig fadeInDelayTop">
                                                                 <div
                                                                     class="box-bg p-22-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">runtime</div>
@@ -143,7 +147,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <div class="box-office mr-35 mb-30">
+                                                            <div
+                                                                class="box-office mr-35 mb-30 animated fadeInUpBig fadeInDelay">
                                                                 <div
                                                                     class="box-bg p-22-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">box offiec</div>
@@ -155,7 +160,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <div class="vote mb-30">
+                                                            <div class="vote mb-30 animated fadeInUpBig fadeInDelay">
                                                                 <div
                                                                     class="box-bg p-22-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">vote avarage</div>

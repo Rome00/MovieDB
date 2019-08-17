@@ -38,6 +38,10 @@
         transition: all 0.5s ease-in-out;
     }
 
+    .main-conten .custom-nav .search-filter ul {
+        width: 90%;
+    }
+
     .navbar .Burgeractive .line1 {
         transform: rotate(-45deg) translate(-13px, 10px);
         background: $lightGreen;
@@ -100,5 +104,22 @@
 @media screen and(max-width: 776px) {
     .form-inline {
         flex-direction: column;
+    }
+
+    .main-conten .custom-nav .navbar-collapse input {
+        height: 38px;
+        font-size: 20px;
+    }
+
+    .main-conten .custom-nav .search-filter ul li {
+        padding: .75rem 3.6rem .75rem 1.25rem;
+        font-size: 14px;
+    }
+
+}
+
+@media screen and(max-width: 576px) {
+    .main-conten .custom-nav .search-filter ul {
+        left: 0;
     }
 }
