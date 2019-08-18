@@ -1,3 +1,6 @@
+//! Vue template for rating calculation
+Vue.component( 'star-rating', VueStarRating.default );
+
 new Vue( {
     el: '#app',
     data: {
@@ -7,38 +10,41 @@ new Vue( {
         movieList: [],
         filterList: {},
         fullInfo: {
-            "backdrop_path": "/1TFEtFxD1M9OvMGlGcSAR5Pg53I.jpg",
+            "backdrop_path": "/3qAM6vvbf6RXR9pLL9yUwHvhEA3.jpg",
             "budget": 58000000,
             "genres": [ {
+                "id": 18,
+                "name": "Drama"
+            }, {
                 "id": 28,
                 "name": "Action"
             }, {
                 "id": 12,
                 "name": "Adventure"
             }, {
-                "id": 35,
-                "name": "Comedy"
+                "id": 36,
+                "name": "History"
             }, {
-                "id": 80,
-                "name": "Crime"
-            }, {
-                "id": 53,
-                "name": "Thriller"
+                "id": 10752,
+                "name": "War"
             } ],
-            "id": 39514,
-            "original_title": "RED",
-            "overview": "When his peaceful life is threatened by a high-tech assassin, former black-ops agent, Frank Moses reassembles his old team in a last ditch effort to survive and uncover his assailants.",
-            "popularity": 14.003,
-            "poster_path": "/q2mwTRKrq1etP9S4SZVDIJq0wI2.jpg",
-            "release_date": "2010-10-13",
-            "revenue": 71664962,
-            "runtime": 111,
+            "homepage": "http://www.redtails2012.com/",
+            "id": 72431,
+            "imdb_id": "tt0485985",
+            "original_language": "en",
+            "original_title": "Red Tails",
+            "overview": "The story of the Tuskegee Airmen, the first African-American pilots to fly in a combat squadron during World War II.",
+            "popularity": 6.904,
+            "poster_path": "/Atq5js5fbsu5EXubZRizWaSXoBJ.jpg",
+            "release_date": "2012-01-19",
+            "revenue": 50365377,
+            "runtime": 125,
             "status": "Released",
-            "tagline": "Still armed. Still dangerous. Still got it.",
-            "title": "RED",
+            "tagline": "High-Octane Action and Daring Dogfights!",
+            "title": "Red Tails",
             "video": false,
-            "vote_average": 6.6,
-            "vote_count": 4238
+            "vote_average": 6,
+            "vote_count": 260
         },
         poster: '',
         bg: {
@@ -48,7 +54,7 @@ new Vue( {
             backgroundSize: "cover"
         },
         imgHead: 'https://image.tmdb.org/t/p/original',
-        currentItem: 0
+        currentItem: 0,
     },
     methods: {
         //! Select movie from randered list by index,
@@ -78,7 +84,7 @@ new Vue( {
             this.keyword = '';
         },
 
-        //! Get movie by rendered list index on click
+        //! Get movie from rendered list by index on click
         itemIndex( index ) {
             this.currentItem = index;
         },
