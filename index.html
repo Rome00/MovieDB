@@ -14,6 +14,7 @@
     <meta property="og:image" content="https://image.tmdb.org/t/p/original/q2mwTRKrq1etP9S4SZVDIJq0wI2.jpg" />
     <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-star-rating@1.6.0/dist/star-rating.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/f43178f547.js"></script>
@@ -42,43 +43,46 @@
                                             <a class="navbar-brand" href="#">
                                                 <img src="img/Logo.png" alt="the movieDB">
                                             </a>
-                                            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                                data-target="#navbarSupportedContent"
-                                                aria-controls="navbarSupportedContent" aria-expanded="false"
-                                                aria-label="Toggle navigation" :class="{'Burgeractive': !show}"
-                                                @click="show =! show">
+                                            <button class="navbar-toggler" type="button"
+                                                :class="{'Burgeractive': !show}" @click="show =! show">
                                                 <span class="line1"></span>
                                                 <span class="line2"></span>
                                                 <span class="line3"></span>
                                             </button>
-                                            <div class="collapse navbar-collapse justify-content-lg-end justify-content-center"
-                                                id="navbarSupportedContent">
-                                                <form
-                                                    class="form-inline my-2 my-lg-0 justify-content-center justify-content-lg-start"
-                                                    v-on:submit.prevent>
-                                                    <div class="my-2 my-sm-0 d-none d-md-block search-icon"></div>
-                                                    <div class="search-filter border-0">
-                                                        <input class="form-control form-control-sm ml-sm-4 border-0"
-                                                            type="text" placeholder="Enter the movie name..."
-                                                            v-model="keyword" @keyup.enter="movieEnter">
-                                                        <ul class="list-group" v-if="isTrue">
-                                                            <li class="list-group-item ripple"
-                                                                v-for="(list, index) in filteredList" :key="index"
-                                                                :class="{'active': currentItem === index}"
-                                                                @click="getMovie(index)" @mouseover="itemIndex(index)"
-                                                                @keyup="nextItem" tabindex="0">
-                                                                {{ list.title }}
-                                                                <span class="search-prew"
-                                                                    :style="{ backgroundImage: 'url(' + imgHead + list.poster_path + ')' }"></span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                            <transition name="scale">
+                                                <div class="navbar-collapse justify-content-lg-end justify-content-center"
+                                                    v-show="!show">
+                                                    <form
+                                                        class="form-inline my-2 my-lg-0 justify-content-center justify-content-lg-start"
+                                                        v-on:submit.prevent>
+                                                        <div class="my-2 my-sm-0 d-none d-md-block search-icon"></div>
+                                                        <div class="search-filter border-0">
+                                                            <input class="form-control form-control-sm ml-sm-4 border-0"
+                                                                type="text" placeholder="Enter the movie name..."
+                                                                v-model="keyword" @keyup.enter="movieEnter">
+                                                            <transition name="slide-search"> 
+                                                                <ul class="list-group" v-if="isTrue">
+                                                                    <li class="list-group-item ripple"
+                                                                        v-for="(list, index) in filteredList"
+                                                                        :key="index"
+                                                                        :class="{'active': currentItem === index}"
+                                                                        @click="getMovie(index)"
+                                                                        @mouseover="itemIndex(index)" @keyup="nextItem"
+                                                                        tabindex="0">
+                                                                        {{ list.title }}
+                                                                        <span class="search-prew"
+                                                                            :style="{ backgroundImage: 'url(' + imgHead + list.poster_path + ')' }"></span>
+                                                                    </li>
+                                                                </ul>
+                                                            </transition>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </transition>
                                         </nav>
                                         <div class="movie-content">
                                             <div class="row">
-                                                <div class="col-lg-5 col-12 mt-5 mt-lg-0 an">
+                                                <div class="col-lg-5 col-12 mt-3 mt-lg-0 an">
                                                     <div class="poster-box animated fadeInLeft">
                                                         <img :src="poster" :alt="fullInfo.original_title">
                                                     </div>
@@ -168,13 +172,16 @@
                                                                         <div class="text" :key="getRating">
                                                                             <div class="icons"
                                                                                 v-if="getRating !== 'no data'">
-                                                                                <i class="fas fa-star"></i>
-                                                                                <i class="fas fa-star"></i>
-                                                                                <i class="fas fa-star"></i>
-                                                                                <i class="fas fa-star"></i>
-                                                                                <i class="fas fa-star"></i>
+                                                                                <star-rating :increment="0.01"
+                                                                                    :star-size="20" :read-only="true"
+                                                                                    :rating="getRating/2"
+                                                                                    :show-rating="false"
+                                                                                    active-color="#fff">
+                                                                                </star-rating>
+                                                                                <div class="points">
+                                                                                    {{ getRating }}
+                                                                                </div>
                                                                             </div>
-                                                                            <span>{{ getRating }}</span>
                                                                         </div>
                                                                     </transition>
                                                                 </div>

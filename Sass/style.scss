@@ -305,16 +305,25 @@
                 font-weight: 700;
                 line-height: 30px;
 
-                span {
-                    margin-left: 10px;
-                }
-
                 .icons {
-                    display: inline-block;
+                    display: flex;
+                    width: 100%;
+                    justify-content: flex-start;
+                    align-items: center;
 
-                    i {
-                        color: $darkerWhite;
-                        font-size: 20px;
+                    .ponts {
+                        width: 40%;
+                    }
+
+                    .vue-star-rating {
+                        width: 130px;
+                        margin-right: 5px;
+                        margin-top: -5px;
+
+                        span {
+                            margin-left: 5px;
+
+                        }
                     }
                 }
 

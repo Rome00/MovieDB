@@ -7,9 +7,10 @@
 }
 
 @media screen and(max-width: 992px) {
-    .main-conten{
-        padding: 50px 0 50px 0;
+    .main-conten {
+        padding: 20px 0 50px 0;
     }
+
     .navbar-light .navbar-toggler {
         border-color: transparent;
         height: 40px;
@@ -109,6 +110,10 @@
         flex-direction: column;
     }
 
+    .main-conten .movie-content {
+        margin-top: 82px;
+    }
+
     .main-conten .custom-nav .navbar-collapse input {
         height: 38px;
         font-size: 20px;
@@ -117,6 +122,16 @@
     .main-conten .custom-nav .search-filter ul li {
         padding: .75rem 3.6rem .75rem 1.25rem;
         font-size: 14px;
+    }
+
+    .main-conten .movie-content .movie-states .movie-popular .score-box {
+        height: 50px;
+        width: 50px;
+        line-height: 50px;
+    }
+
+    .main-conten .movie-content .movie-states .movie-popular .score-titles .imdb {
+        font-size: 16px;
     }
 
 }
