@@ -162,6 +162,9 @@
     animation-delay: 0.2s;
 }
 
+.flip-move {
+    transition: transform 1s;
+  }
 
 .bounceInUp-enter-active {
     animation: bounceInUp 1s;

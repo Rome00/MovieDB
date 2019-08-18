@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <meta property="og:image" content="https://image.tmdb.org/t/p/original/q2mwTRKrq1etP9S4SZVDIJq0wI2.jpg" />
     <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/f43178f547.js"></script>
@@ -124,11 +124,11 @@
                                                                     class="box-bg p-22-30 d-flex align-items flex-column justify-content-between">
                                                                     <div class="title">ganre</div>
                                                                     <transition-group name="bounceInUp" tag="div">
-                                                                        <span class="genres"
+                                                                        <div class="genres"
                                                                             v-for="item in fullInfo.genres"
-                                                                            :key="item.id">
-                                                                            {{ item.name }}
-                                                                        </span>
+                                                                            :key="item.name">
+                                                                            <span>{{ item.name }}</span>
+                                                                        </div>
                                                                     </transition-group>
                                                                 </div>
                                                             </div>

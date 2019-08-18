@@ -288,13 +288,13 @@
             }
 
             .genres {
-                display: contents;
+                float: left;
+                display: block;
                 color: $white;
                 font-weight: 600;
+                padding: 0 5px;
 
-                span {
-                    display: contents;
-                }
+
             }
 
             .text {

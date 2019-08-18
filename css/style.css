@@ -312,6 +312,13 @@ body {
           animation-delay: 0.2s;
 }
 
+.flip-move {
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+
 .bounceInUp-enter-active {
   -webkit-animation: bounceInUp 1s;
           animation: bounceInUp 1s;
@@ -635,13 +642,11 @@ body {
 }
 
 .main-conten .movie-content .moreInfo .genres {
-  display: contents;
+  float: left;
+  display: block;
   color: #fff;
   font-weight: 600;
-}
-
-.main-conten .movie-content .moreInfo .genres span {
-  display: contents;
+  padding: 0 5px;
 }
 
 .main-conten .movie-content .moreInfo .text {
