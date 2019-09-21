@@ -131,7 +131,7 @@ new Vue({
       console.log(this.filterList.id);
       this.$http
         .get(
-          `http://api.themoviedb.org/3/movie/${this.filterList.id}?api_key=ad37adf30760fa22b0f9a4e01354dd8a`
+          `https://api.themoviedb.org/3/movie/${this.filterList.id}?api_key=ad37adf30760fa22b0f9a4e01354dd8a`
         )
         .then(Response => {
           return Response.json();
